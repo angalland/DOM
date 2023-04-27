@@ -12,6 +12,16 @@
         <div id="board"></div>
 
         <script> // balise dans laquelle on écrit le code javascript
+        
+            function shuffleChildren(parent) {
+                let children = parent.children
+                let i = children.length, k , temp
+                while(--i > 0){
+                    k = Math.floor(Math.random() * (i+1))
+                    temp = children[k]
+                    children[k] = children[i]
+                    parent.appendChild(temp)
+            }
 
             const box = document.createElement("div") // méthode createElement de l'objet document va instancié un nouvel element HTMLElement qui sera  représenté par la balise spécifié en argument de cette méthode ici "div"
             box.classList.add("box") // on modifie sa propriété classList (contenant la liste des class CSS attribué à l'élément) pour lui ajouter la class .box
@@ -27,7 +37,7 @@
                 board.appendChild(newbox)
             }
 
-            let i = board.children.length, k , temp
+            /*let i = board.children.length, k , temp
             while (--i > 0){// on boucle tant que 1 oté de i est toujours positif
                 // k stocke un nombre aléatoire basé sur i
                 k = Math.floor(Math.random() * (i+1)) 
@@ -38,7 +48,11 @@
                 // place l'élément k pointé temporairement à la fin du contenu de board 
                 board.appendChild(temp)
 
+            }*/
+
             }
+
+            shuffleChildren(board)
 
 
         </script>
