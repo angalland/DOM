@@ -21,6 +21,7 @@
                     temp = children[k]
                     children[k] = children[i]
                     parent.appendChild(temp)
+                }
             }
 
             const box = document.createElement("div") // méthode createElement de l'objet document va instancié un nouvel element HTMLElement qui sera  représenté par la balise spécifié en argument de cette méthode ici "div"
@@ -37,7 +38,8 @@
                 const newbox = box.cloneNode() // On crée une nouvelle variable qui est un clone de box avec la méthode cloneNOde()
                 newbox.innerText = i
                 board.appendChild(newbox)
-
+                shuffleChildren(board)
+                
                 newbox.addEventListener("click", function(){
                     
                     if (i == nb){
@@ -76,9 +78,7 @@
 
             }*/
 
-            }
 
-            shuffleChildren(board)
 
 
         </script>

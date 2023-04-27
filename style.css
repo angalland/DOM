@@ -14,11 +14,14 @@
     margin: 5px;
     animation: appear 1s;
     border-radius: 6px;
+    cursor: pointer; /* transforme le curseur de la souris*/
+    transition: background-color 0.8s, color 0.8s, transform 0.8s;
 }
 
 .box-valid{
-    background-color: grey;
-    opacity: 0.5;
+    background-color: #ccc;
+    color: #aaa;
+    transform: scale(0.8); /* reduit la taille de 20% */
 }
 
 .box-clicked{
