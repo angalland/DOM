@@ -11,8 +11,36 @@
 
         <div id="board"></div>
 
-        <script>
+        <script> // balise dans laquelle on écrit le code javascript
+
+            const box = document.createElement("div") // méthode createElement de l'objet document va instancié un nouvel element HTMLElement qui sera  représenté par la balise spécifié en argument de cette méthode ici "div"
+            box.classList.add("box") // on modifie sa propriété classList (contenant la liste des class CSS attribué à l'élément) pour lui ajouter la class .box
+
+            const board = document.querySelector("#board") // On lui fait une place dans le DOM tree en le placant en enfant de la div#board avec la méthode appendChild() de l'objet document
+            // board.appendChild(box)
             
+            // box.innerText = 1 ajoute un noeud texte dans l'element box
+
+            for(let i = 1; i <= 10; i++){ // crée une boucle pour produire un nombre de boite (ici de 1 a 10)
+                let newbox = box.cloneNode() // On crée une nouvelle variable qui est un clone de box avec la méthode cloneNOde()
+                newbox.innerText = i
+                board.appendChild(newbox)
+            }
+
+            let i = board.children.length, k , temp
+            while (--i > 0){// on boucle tant que 1 oté de i est toujours positif
+                // k stocke un nombre aléatoire basé sur i
+                k = Math.floor(Math.random() * (i+1)) 
+                // temp pointe temporairement l'élément à la position k dans board
+                temp = board.children[k]
+                // remplace l'élément à la position k par l'élément à la position i
+                board.children[k] = board.children[i]
+                // place l'élément k pointé temporairement à la fin du contenu de board 
+                board.appendChild(temp)
+
+            }
+
+
         </script>
     </body>
 </html>
