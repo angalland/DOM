@@ -24,6 +24,15 @@
                 }
             }
 
+            function showReaction(type, clickedBox){
+                clickedBox.classList.add(type)
+                if(type !== "succes"){
+                    setTimeout(function(){
+                        clickedBox.classList.remove(type)
+                    }, 800)
+                }
+            }
+
             const box = document.createElement("div") // méthode createElement de l'objet document va instancié un nouvel element HTMLElement qui sera  représenté par la balise spécifié en argument de cette méthode ici "div"
             box.classList.add("box") // on modifie sa propriété classList (contenant la liste des class CSS attribué à l'élément) pour lui ajouter la class .box
 
@@ -32,9 +41,11 @@
             
             // box.innerText = 1 ajoute un noeud texte dans l'element box
 
+            // let nb = prompt("Avec combien de boites voulez vous jouez ?");
+            let nbBoite = prompt("Avec combien de boites voulez-vous jouez ?")
             let nb = 1
 
-            for(let i = 1; i <= 10; i++){ // crée une boucle pour produire un nombre de boite (ici de 1 a 10)
+            for(let i = 1; i <= nbBoite; i++){ // crée une boucle pour produire un nombre de boite (ici de 1 a 10)
                 const newbox = box.cloneNode() // On crée une nouvelle variable qui est un clone de box avec la méthode cloneNOde()
                 newbox.innerText = i
                 board.appendChild(newbox)
@@ -45,22 +56,26 @@
                     if (i == nb){
                         newbox.classList.add("box-valid") 
                         //1
+                        shuffleChildren(board)
                         if (nb == board.children.length){
-                            alert("VICTOIRE !")
+                            board.querySelectorAll(".box").forEach(function(box){
+                                showReaction("succes", box)
+                            })
                         }
                         nb++
                     }
                     // 2
                     else if(i > nb){
-                        alert("Erreure, recommencez ! ")
+                        showReaction("error", newbox)
                         nb = 1
                         board.querySelectorAll(".box-valid").forEach(function(validBox){
                             validBox.classList.remove("box-valid")
                         })
+                        shuffleChildren(board)
                     }
                     // 3
                     else{
-                        alert("Case déjà cliquée")
+                        showReaction("notice", newbox)
                     }
                 })
             }
