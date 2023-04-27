@@ -10,6 +10,7 @@
     <body>
 
         <div id="board"></div>
+        <div class="timer">0</div>
 
         <script> // balise dans laquelle on écrit le code javascript
 
@@ -44,15 +45,16 @@
             // let nb = prompt("Avec combien de boites voulez vous jouez ?");
             let nbBoite = prompt("Avec combien de boites voulez-vous jouez ?")
             let nb = 1
+           
+            
 
             for(let i = 1; i <= nbBoite; i++){ // crée une boucle pour produire un nombre de boite (ici de 1 a 10)
                 const newbox = box.cloneNode() // On crée une nouvelle variable qui est un clone de box avec la méthode cloneNOde()
                 newbox.innerText = i
                 board.appendChild(newbox)
                 shuffleChildren(board)
-                
+
                 newbox.addEventListener("click", function(){
-                    
                     if (i == nb){
                         newbox.classList.add("box-valid") 
                         //1
@@ -61,6 +63,7 @@
                             board.querySelectorAll(".box").forEach(function(box){
                                 showReaction("succes", box)
                             })
+                            // clearInterval(temps)   
                         }
                         nb++
                     }
@@ -92,7 +95,23 @@
                 board.appendChild(temp)
 
             }*/
+            let temps = 0
+            const timerElement = document.getElementsByClassName("timer")[0]
+            function compterTemps(){
+                
+                let minutes = parseInt(temps / 60, 10)
+                let secondes = parseInt(temps % 60, 10)
 
+                minutes = minutes < 10 ? "0" + minutes : minutes
+                secondes = secondes < 10 ? "0" + secondes : secondes
+
+                timerElement.innerText = minutes + ":" + secondes
+                temps++
+
+                
+                
+            }
+             setInterval(compterTemps, 1000)
 
 
 
