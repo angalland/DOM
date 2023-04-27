@@ -12,7 +12,7 @@
         <div id="board"></div>
 
         <script> // balise dans laquelle on écrit le code javascript
-        
+
             function shuffleChildren(parent) {
                 let children = parent.children
                 let i = children.length, k , temp
@@ -35,6 +35,11 @@
                 let newbox = box.cloneNode() // On crée une nouvelle variable qui est un clone de box avec la méthode cloneNOde()
                 newbox.innerText = i
                 board.appendChild(newbox)
+
+                newbox.addEventListener("click", function(){
+                    console.log("Boite n°"+ i +", click !")
+                    newbox.classList.add("box-valid")
+                })
             }
 
             /*let i = board.children.length, k , temp

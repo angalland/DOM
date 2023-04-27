@@ -16,6 +16,11 @@
     border-radius: 6px;
 }
 
+.box-valid{
+    background-color: grey;
+    opacity: 0.5;
+}
+
 .box-clicked{
     background-color: #ccc;
     color: #aaa;
