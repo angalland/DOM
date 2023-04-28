@@ -34,6 +34,22 @@
                 }
             }
 
+            function compterTemps(){
+                
+                let minutes = parseInt(temps / 60, 10)
+                let secondes = parseInt(temps % 60, 10)
+
+                minutes = minutes < 10 ? "0" + minutes : minutes
+                secondes = secondes < 10 ? "0" + secondes : secondes
+
+                timerElement.innerText = minutes + ":" + secondes
+                temps++
+
+            }
+
+            let temps = 0
+            const timerElement = document.getElementsByClassName("timer")[0]
+
             const box = document.createElement("div") // méthode createElement de l'objet document va instancié un nouvel element HTMLElement qui sera  représenté par la balise spécifié en argument de cette méthode ici "div"
             box.classList.add("box") // on modifie sa propriété classList (contenant la liste des class CSS attribué à l'élément) pour lui ajouter la class .box
 
@@ -47,6 +63,7 @@
             let nb = 1
            
             
+            setInterval(compterTemps, 1000)
 
             for(let i = 1; i <= nbBoite; i++){ // crée une boucle pour produire un nombre de boite (ici de 1 a 10)
                 const newbox = box.cloneNode() // On crée une nouvelle variable qui est un clone de box avec la méthode cloneNOde()
@@ -57,17 +74,17 @@
                 newbox.addEventListener("click", function(){
                     if (i == nb){
                         newbox.classList.add("box-valid") 
-                        //1
+                        //1 voir au dessous
                         shuffleChildren(board)
                         if (nb == board.children.length){
                             board.querySelectorAll(".box").forEach(function(box){
                                 showReaction("succes", box)
                             })
-                            // clearInterval(temps)   
+                               
                         }
                         nb++
                     }
-                    // 2
+                    // 2 voir au dessous
                     else if(i > nb){
                         showReaction("error", newbox)
                         nb = 1
@@ -76,7 +93,7 @@
                         })
                         shuffleChildren(board)
                     }
-                    // 3
+                    // 3 voir au dessous
                     else{
                         showReaction("notice", newbox)
                     }
@@ -95,24 +112,16 @@
                 board.appendChild(temp)
 
             }*/
-            let temps = 0
-            const timerElement = document.getElementsByClassName("timer")[0]
-            function compterTemps(){
+ 
+             // setInterval(compterTemps, 1000)
                 
-                let minutes = parseInt(temps / 60, 10)
-                let secondes = parseInt(temps % 60, 10)
+          
 
-                minutes = minutes < 10 ? "0" + minutes : minutes
-                secondes = secondes < 10 ? "0" + secondes : secondes
+            //1 Si nb est égale au nombre de boites du jeu, c'est que le dernier clic était sur la dernière boite -> victoire du joeur ! (Il ne faut pas incrémenter nb avant !)
 
-                timerElement.innerText = minutes + ":" + secondes
-                temps++
-
-                
-                
-            }
-             setInterval(compterTemps, 1000)
-
+            // 2 Si le numéro de la boite est supérieure a nb, c'est que le joeur a cliqué une boite trop élevée -> game over !
+            
+            // 3 dernière possibilité : le joeur a cliqué sur une boite déja grisée. On l'informe simplement de cela, le jeu ne redémarre pas
 
 
         </script>
